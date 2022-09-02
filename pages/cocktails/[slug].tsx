@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { getLandingPage } from '../api/landing-pages/[slug]';
+import { getLandingPage } from '../api/cocktails/[slug]';
 
 type LandingPageProps = {
     title: string;

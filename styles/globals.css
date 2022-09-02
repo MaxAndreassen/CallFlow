@@ -1,3 +1,173 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    background-color: #0f1115;
+}
+
+.search {
+    color: #0f1115;
+    font-weight: 700;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    font-size: 1.5em;
+    padding: 0.5em;
+    outline: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    text-align: center;
+    background: 0 0;
+    color: #fff;
+    border-bottom: 2px solid #fff;
+    text-align: left;
+    color: #0f1115;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 1px 2px 4px rgb(0 0 0 / 25%);
+    padding-left: 2.5em;
+    background-repeat: no-repeat;
+    background-size: 1em;
+    background-position: 0.75em center;
+    width: 350px;
+    max-width: 80vw;
+    border-radius: 100px;
+    border: none;
+}
+
+.search-icon {
+    position: absolute;
+    top: 16px;
+    left: 23px;
+}
+
+.search-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 1.5rem;
+    position: relative;
+}
+
+.display-none {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .display-none-md {
+        display: none;
+    }
+
+    .display-flex-md {
+        display: flex;
+    }
+}
+
+.top-banner {
+    text-align: center;
+    color: white;
+    top: 20px;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .top-banner {
+        margin-top: 0;
+    }
+}
+
+.sticky-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.bottom-dip {
+    background-image: url(/images/BottomDip.png);
+    height: 96px;
+    background-position: center;
+    background-size: cover;
+}
+
+@media (min-width: 768px) {
+    .big-borders {
+        border-radius: 10px;
+    }
+}
+
+.bottom-left-quarter-circle {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-bottom-left-radius: 110px;
+    border: 6px solid white;
+    border-bottom: 0px;
+    border-right: 0px;
+    border-top: 0px;
+}
+
+.bottom-right-quarter-circle {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-bottom-right-radius: 110px;
+    border: 6px solid white;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-top: 0px;
+}
+
+.top-right-quarter-circle {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-top-right-radius: 110px;
+    border: 6px solid white;
+    border-bottom: 0px;
+    border-left: 0px;
+}
+
+.top-left-quarter-circle {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-top-left-radius: 110px;
+    border: 6px solid white;
+    border-bottom: 0px;
+    border-right: 0px;
+}

@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { Db, MongoClient } from 'mongodb';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const MONGODB_DB = process.env.DB_NAME;
@@ -13,10 +13,15 @@ if (!MONGODB_DB) {
     throw new Error('Define the MONGODB_DB environmental variable');
 }
 
-let cachedClient = null;
-let cachedDb = null;
+interface Mongo {
+    client: MongoClient,
+    db: Db
+}
 
-export async function connectToDatabase() {
+let cachedClient: any = null;
+let cachedDb: any = null;
+
+export async function connectToDatabase(): Promise<Mongo> {
     // check the cached.
     if (cachedClient && cachedDb) {
         // load from cache
@@ -33,6 +38,7 @@ export async function connectToDatabase() {
     };
 
     // Connect to cluster
+    //@ts-ignore
     let client = new MongoClient(MONGODB_URI, opts);
     await client.connect();
     let db = client.db(MONGODB_DB);

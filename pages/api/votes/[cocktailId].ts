@@ -37,7 +37,7 @@ async function deleteVote(
         let { db } = await connectToDatabase();
         // add the post
 
-        const cocktail = db
+        const cocktail = await db
             .collection('cocktails')
             .findOne({ id: cocktailId });
 
@@ -90,14 +90,13 @@ async function postVote(
         let { db } = await connectToDatabase();
         // add the post
 
-        const cocktail = db
+        const cocktail = await db
             .collection('cocktails')
             .findOne({ id: cocktailId });
 
         if (!cocktail) {
             return res.json({
                 //@ts-ignore
-                message: cocktail,
                 success: false,
             });
         }

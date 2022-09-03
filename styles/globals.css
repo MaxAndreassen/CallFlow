@@ -86,7 +86,10 @@ html {
     bottom: 0;
     width: 100%;
     text-align: center;
-    background-color: white;
+    border: 4px solid white;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
 }
 
 .lds-dual-ring {

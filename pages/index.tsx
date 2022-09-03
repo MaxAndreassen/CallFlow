@@ -55,16 +55,16 @@ const Home: NextPage = () => {
           <div style={{ "marginTop": "0.6rem", "marginLeft": "0.7rem" }}>
             <Logo></Logo>
           </div>
-          <Link href="/post-a-job">
+          <Link href="/cocktails/create">
             <button
               type="button"
-              className="m-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-orange-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+              className="m-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-lime-600 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
             >
               Create Cocktail
             </button>
           </Link>
         </div>
-        <h2 className="top-banner mx-4">Will you build the next big cocktail?</h2>
+        <h2 className="top-banner mx-4">Will you create the next big cocktail?</h2>
         <div className="search-wrapper">
           <SearchIcon className="flex-shrink-0 mr-1.5 h-8 w-8 text-gray-700 search-icon" aria-hidden="true" />
           <DebounceInput className="search" type="text" placeholder="find a cocktail" value={searchTerm} debounceTimeout={300} onChange={(e) => { handleSearch(e) }}>
@@ -75,7 +75,7 @@ const Home: NextPage = () => {
         <Loading></Loading>
       </div>}
       {count > 0 && <>
-        <div className="mt-6 px-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        <div className="mt-6 px-6 grid grid-cols-1 gap-y-4 gap-x-6 xl:gap-x-8">
           {!!cocktails && cocktails.map((cocktail, i) => (
             <CocktailSummary cocktail={cocktail}></CocktailSummary>
           ))}

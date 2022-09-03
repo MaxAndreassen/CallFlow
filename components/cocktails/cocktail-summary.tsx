@@ -32,6 +32,9 @@ export const CocktailSummary: NextPage<Props> = ({ cocktail }) => {
   }, []);
 
   const vote = async () => {
+    if (loading)
+      return;
+
     setLoading(true);
     cocktail.votes = !cocktail.votes ? 1 : cocktail.votes + 1;
     setVoted(true);
@@ -40,6 +43,27 @@ export const CocktailSummary: NextPage<Props> = ({ cocktail }) => {
       // save the post
       let response = await fetch('/api/votes/' + cocktail.id, {
         method: 'POST'
+      });
+
+      // get the data
+      let data = await response.json();
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const deleteVote = async () => {
+    if (loading)
+      return;
+
+    setLoading(true);
+    cocktail.votes = !cocktail.votes ? 0 : cocktail.votes - 1;
+    setVoted(false);
+
+    try {
+      // save the post
+      let response = await fetch('/api/votes/' + cocktail.id, {
+        method: 'DELETE'
       });
 
       // get the data
@@ -75,13 +99,13 @@ export const CocktailSummary: NextPage<Props> = ({ cocktail }) => {
       </Link>
       <div className="group relative px-3 md:px-5 pt-3" style={{ marginBottom: 'auto', marginTop: 'auto' }}>
         {!voted ? <button onClick={vote}>
-          <ArrowCircleUpIcon className="text-white" style={{width: "26px", height: "26px"}}></ArrowCircleUpIcon>
+          <ArrowCircleUpIcon className="text-white" style={{ width: "26px", height: "26px" }}></ArrowCircleUpIcon>
           <p className="text-center mb-3 text-white">{cocktail?.votes ?? 0}</p>
         </button> :
-          <>
-            <ArrowCircleUpIcon className="text-lime-500" style={{width: "26px", height: "26px"}}></ArrowCircleUpIcon>
+          <button onClick={deleteVote}>
+            <ArrowCircleUpIcon className="text-lime-500" style={{ width: "26px", height: "26px" }}></ArrowCircleUpIcon>
             <p className="text-center mb-3 text-lime-500">{cocktail?.votes ?? 0}</p>
-          </>}
+          </button>}
       </div>
     </div>
   )

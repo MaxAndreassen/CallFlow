@@ -17,10 +17,13 @@ export default async function handler(
         case 'POST': {
             return postVote(req, res);
         };
+        case 'DELETE': {
+            return deleteVote(req, res);
+        };
     }
 }
 
-async function postVote(
+async function deleteVote(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
@@ -28,7 +31,7 @@ async function postVote(
         const { cocktailId } = req.query;
 
         const forwarded = req.headers["x-forwarded-for"] as string;
-        const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
+        const ip = forwarded ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
 
         // connect to the database
         let { db } = await connectToDatabase();
@@ -46,11 +49,66 @@ async function postVote(
             });
         }
 
+        const votes = !cocktail.votes ? 0 : cocktail.votes - 1;
+
         await db.collection('cocktails').updateOne(
             {
                 id: cocktailId,
             },
-            { $set: { votes: (cocktail.votes ?? 0) + 1 } }
+            { $set: { votes: votes}}
+        );
+
+        await db.collection('votes')
+            .deleteOne({ ip: ip, cocktailId: cocktailId });
+
+        // return a message
+        return res.json({
+            message: 'Vote Removed Successfully',
+            success: true,
+        });
+    } catch (error) {
+        // return an error
+        return res.json({
+            //@ts-ignore
+            message: new Error(error).message,
+            success: false,
+        });
+    }
+}
+
+async function postVote(
+    req: NextApiRequest,
+    res: NextApiResponse
+) {
+    try {
+        const { cocktailId } = req.query;
+
+        const forwarded = req.headers["x-forwarded-for"] as string;
+        const ip = forwarded ? forwarded.split(/, /)[0] : req.socket.remoteAddress
+
+        // connect to the database
+        let { db } = await connectToDatabase();
+        // add the post
+
+        const cocktail = db
+            .collection('cocktails')
+            .findOne({ id: cocktailId });
+
+        if (!cocktail) {
+            return res.json({
+                //@ts-ignore
+                message: cocktail,
+                success: false,
+            });
+        }
+
+        const votes = !cocktail.votes ? 1 : cocktail.votes + 1;
+
+        await db.collection('cocktails').updateOne(
+            {
+                id: cocktailId,
+            },
+            { $set: { votes: votes } }
         );
 
         await db.collection('votes').insertOne({
@@ -82,25 +140,26 @@ async function checkVote(
         const { cocktailId } = req.query;
 
         const forwarded = req.headers["x-forwarded-for"] as string;
-        const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
+        const ip = forwarded ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
 
         // connect to the database
         let { db } = await connectToDatabase();
         // add the post
-        const votes = await db.collection('votes')
-            .find({ ip: ip, id: cocktailId })
-            .toArray();
+        const voteCount = await db.collection('votes')
+            .count({ ip: ip, cocktailId: cocktailId })
 
-        if (votes.any()) {
+        if (voteCount > 0) {
             return res.json({
                 voted: true,
                 success: true,
+                ip: ip
             });
         } else {
             // return a message
             return res.json({
                 voted: false,
                 success: true,
+                ip: ip
             });
         }
     } catch (error) {

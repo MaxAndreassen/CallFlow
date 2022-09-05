@@ -3,17 +3,17 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { CocktailIngredients } from '../../components/cocktails/cocktail-ingredients';
 import { Logo } from '../../components/shared/logo';
+import { getLandingPage } from '../api/cocktails/[slug]';
 
 type LandingPageProps = {
-    title: string;
-    sections: any[];
+    props: {cocktail: any}
 }
 
-const LandingPage: NextPage<LandingPageProps> = () => {
+const LandingPage: NextPage<LandingPageProps> = (props: any) => {
     return (
         <>
             <Head>
-                <title>{"test"}</title>
+                <title>{props?.cocktail?.name}</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -24,42 +24,30 @@ const LandingPage: NextPage<LandingPageProps> = () => {
                             <Logo></Logo>
                         </div>
                     </Link>
-                    <h1 className="pt-4 pr-4 font-bold mt-1" style={{ "color": "white" }}>Test Cocktail</h1>
+                    <h1 className="pt-4 pr-4 font-bold mt-1" style={{ "color": "white" }}>{props?.cocktail?.name}</h1>
                 </div>
             </div>
             <div className='pb-10 mx-10 md:pt-10 pt-4' style={{ borderWidth: '4px', borderLeft: '0', borderRight: '0', borderTop: '0', borderStyle: 'dashed' }}>
-                <h1 className='text-white text-center font-bold text-md mt-6'>Test Cocktail</h1>
-                <p className='text-white text-center font-bold text-md mt-6 md:pb-10'>This is a fantastic test cocktail.</p>
+                <h1 className='text-white text-center font-bold text-md mt-6'>{props?.cocktail?.name}</h1>
+                <p className='text-white text-center font-bold text-md mt-6 md:pb-10'>{props?.cocktail?.description}</p>
             </div>
             <div className="flex mx-10 mt-10 justify-evenly flex-wrap gap-6 md:gap-12 md:pt-6 md:mx-16">
-                <CocktailIngredients ingredients={[{
-                    amount: 2.5,
-                    name: 'test'
-                }, {
-                    amount: 2,
-                    name: 'test'
-                }, {
-                    amount: 2,
-                    name: 'test'
-                }, {
-                    amount: 2,
-                    name: 'test'
-                }, {
-                    amount: 2.5,
-                    name: 'test'
-                }, {
-                    amount: 2,
-                    name: 'test'
-                }, {
-                    amount: 2,
-                    name: 'test'
-                }, {
-                    amount: 2,
-                    name: 'test'
-                }]}></CocktailIngredients>
+                <CocktailIngredients ingredients={props?.cocktail?.ingredients}></CocktailIngredients>
             </div>
         </>
     )
 };
+
+export async function getServerSideProps(context: any) {
+    const { slug } = context.query;
+
+    const result = await getLandingPage(slug);
+
+    return {
+        props: {
+            cocktail: result
+        }, // will be passed to the page component as props
+    }
+}
 
 export default LandingPage;

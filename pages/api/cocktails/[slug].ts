@@ -24,9 +24,14 @@ export const getLandingPage = async (slug: string) => {
     let { db } = await connectToDatabase();
 
     const page = await db
-        .collection('landing-page')
-        .find({ slug: cleanSlug })
-        .toArray();
+        .collection('cocktails')
+        .findOne({ name: cleanSlug });
+
+    //@ts-ignore
+    page._id = null;
+
+    //@ts-ignore
+    page.createdAt = null;
 
     // return the posts
     return page;

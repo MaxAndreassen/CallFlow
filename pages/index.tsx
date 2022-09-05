@@ -64,18 +64,30 @@ const Home: NextPage = () => {
             </button>
           </Link>
         </div>
-        <h2 className="top-banner mx-4">Will you create the next big cocktail?</h2>
+        <h1 className="text-lg top-banner mx-4 display-none display-block-md">Will you create the next big cocktail?</h1>
         <div className="search-wrapper">
-          <SearchIcon className="flex-shrink-0 mr-1.5 h-8 w-8 text-gray-700 search-icon" aria-hidden="true" />
+          <SearchIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-600 search-icon" aria-hidden="true" />
           <DebounceInput className="search" type="text" placeholder="find a cocktail" value={searchTerm} debounceTimeout={300} onChange={(e) => { handleSearch(e) }}>
           </DebounceInput>
+        </div>
+        <div>
+          <select
+            id="department"
+            name="department"
+            autoComplete="department"
+            style={{width: '320px', borderRadius: '999px', height: '30px', fontSize: '12px', lineHeight: 1, fontWeight: 500}}
+            className="mt-3 mx-auto block py-2 px-3 border text-gray-500 border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+          >
+            <option>🏆 Best Cocktails</option>
+            <option>🆕 Newest Cocktails</option>
+          </select>
         </div>
       </div>
       {loading && <div className='mx-auto text-center mt-10'>
         <Loading></Loading>
       </div>}
       {count > 0 && <>
-        <div className="mt-6 px-6 grid grid-cols-1 gap-y-4 gap-x-6 xl:gap-x-8">
+        <div className="mt-4 px-6 grid grid-cols-1 gap-y-4 gap-x-6 xl:gap-x-8">
           {!!cocktails && cocktails.map((cocktail, i) => (
             <CocktailSummary cocktail={cocktail}></CocktailSummary>
           ))}
@@ -93,7 +105,7 @@ const Home: NextPage = () => {
             onNextClicked={() => {
               Router.push({
                 pathname: process.env.BASE_URL,
-                query: { q: router.query.q, p: Number.parseInt(router.query.p as string) + 1 },
+                query: { q: router.query.q, p: !!router.query.p ? Number.parseInt(router.query.p as string) + 1 : 1 },
               });
             }}
           ></Pagination>

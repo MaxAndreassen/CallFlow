@@ -79,7 +79,7 @@ export const CocktailSummary: NextPage<Props> = ({ cocktail }) => {
         <p className="text-center mb-3">🍸</p>
       </div>
       <Link href={"/cocktails/" + cocktail.name}>
-        <div className="px-3 flex-grow my-3" style={{ borderWidth: "4px", borderTop: "0", borderBottom: "0", }}>
+        <div className="px-3 flex-grow my-3" style={{ borderWidth: "4px", borderTop: "0", borderBottom: "0", whiteSpace: 'nowrap', overflow: 'hidden' }}>
           <div>
             <h2 className="text-md text-white font-bold">
               <span aria-hidden="true" className="absolute inset-0" />

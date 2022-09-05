@@ -99,11 +99,12 @@ const CreateCocktail = () => {
                         <Logo></Logo>
                     </div>
                 </Link>
-                <h1 className="pt-4 pr-4 font-bold mt-1" style={{ "color": "white" }}>Your New Cocktail</h1>
+                <h1 className="pt-4 pr-4 font-bold mt-1" style={{ "color": "white" }}></h1>
             </div>
         </div>
-        <div className="p-4">
-            <div className="lg:grid lg:grid-cols-4 md:gap-y=6 mb-14">
+        <div className="top-title">Your New Cocktail</div>
+        <div className="p-4" style={{backgroundColor: '#e5e7eb'}}>
+            <div className="lg:grid lg:grid-cols-4 md:gap-y=6 mb-14 mt-4">
                 <div className="lg:col-span-1">
                 </div>
                 <div className="lg:col-span-2">
@@ -112,7 +113,7 @@ const CreateCocktail = () => {
                             <div className="shadow sm:rounded-md sm:overflow-hidden">
                                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6 bg-black">
                                     <div className="grid grid-cols-3 gap-y-6">
-                                        <div className="col-span-3 sm:col-span-3">
+                                        <div className="col-span-3 sm:col-span-3 mt-3">
                                             <label htmlFor="company-name" className="block text-sm font-medium text-white">
                                                 COCKTAIL NAME*
                                             </label>
@@ -195,13 +196,13 @@ const CreateCocktail = () => {
                                                         type="button"
                                                         onClick={() => addIngredient()}
                                                         className="text-black bg-gray-400 text-lg inline-flex items-center py-2 border border-transparent rounded-md shadow-sm text-xs p-3 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-                                                    ><span className="text-gray-500">ADD EXTRA INGREDIENT</span>
+                                                    ><span className="text-gray-500">Add Extra Ingredient</span>
                                                     </button> :
                                                     <button
                                                         type="button"
                                                         onClick={() => addIngredient()}
                                                         className="text-white text-lg inline-flex items-center py-2 border border-transparent rounded-md shadow-sm text-xs p-3 font-medium bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-                                                    >ADD EXTRA INGREDIENT
+                                                    >Add Extra Ingredient
                                                     </button>}
                                             </div>
                                         </div>

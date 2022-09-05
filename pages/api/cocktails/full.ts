@@ -44,6 +44,7 @@ async function postCocktail(
         });
     }
 }
+
 async function getCocktails(
     req: NextApiRequest,
     res: NextApiResponse
@@ -69,7 +70,7 @@ async function getCocktails(
             posts = await db
                 .collection('cocktails')
                 .find({ $text: { $search: cleanQuery } })
-                .sort({ published: -1 })
+                .sort({ votes: -1 })
                 .skip(cleanPage * pageSize)
                 .limit(pageSize)
                 .toArray();
@@ -82,7 +83,7 @@ async function getCocktails(
             posts = await db
                 .collection('cocktails')
                 .find({})
-                .sort({ published: -1 })
+                .sort({ votes: -1 })
                 .skip(cleanPage * pageSize)
                 .limit(pageSize)
                 .toArray();

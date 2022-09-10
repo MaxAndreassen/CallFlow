@@ -19,6 +19,8 @@ const CreateCocktail = () => {
     const [ingredients, setIngredients] = useState([] as Ingredient[]);
     const [owner, setOwner] = useState('');
     const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('Cocktail');
+    const [glassType, setGlassType] = useState('Cocktail glass');
 
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
@@ -55,7 +57,7 @@ const CreateCocktail = () => {
         setLoading(false);
 
         // fields check
-        if (!name || !description || ingredients?.length < 1)
+        if (!name || !description || ingredients?.length < 1 || !category ||!glassType)
             return setError('Missing required fields');
 
         // post structure
@@ -64,7 +66,10 @@ const CreateCocktail = () => {
             name,
             owner: !owner ? 'anonymous' : owner,
             description,
-            ingredients
+            ingredients,
+            category,
+            glassType,
+            createdAt: new Date(),
         };
 
         setLoading(true);
@@ -215,7 +220,56 @@ const CreateCocktail = () => {
                                         </div>
 
                                         <div className="col-span-3 sm:col-span-3">
-                                            <label htmlFor="position" className="block text-sm font-medium  text-white">
+                                            <label htmlFor="category" className="block text-sm font-medium text-white">
+                                                TYPE OF DRINK*
+                                            </label>
+                                            <select
+                                                id="category"
+                                                name="category"
+                                                onChange={(e) => setCategory(e.target.value)}
+                                                autoComplete="category"
+                                                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                                            >
+                                                <option>Cocktail</option>
+                                                <option>Punch / Party Drink</option>
+                                                <option>Shot</option>
+                                                <option>Beer</option>
+                                                <option>Wine</option>
+                                                <option>Shake</option>
+                                                <option>Soft Drink</option>
+                                                <option>Coffee / Tea</option>
+                                                <option>Ordinary Drink</option>
+                                                <option>Other/Unknown</option>
+                                            </select>
+                                        </div>
+
+                                        <div className="col-span-3 sm:col-span-3">
+                                            <label htmlFor="glassType" className="block text-sm font-medium text-white">
+                                                STANDARD GLASS TYPE*
+                                            </label>
+                                            <select
+                                                id="glassType"
+                                                name="glassType"
+                                                onChange={(e) => setGlassType(e.target.value)}
+                                                autoComplete="glassType"
+                                                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                                            >
+                                                <option>Cocktail glass</option>
+                                                <option>Shot glass</option>
+                                                <option>Martini glass</option>
+                                                <option>Beer glass</option>
+                                                <option>Brandy snifter</option>
+                                                <option>Pitcher</option>
+                                                <option>Old-fashioned glass</option>
+                                                <option>Highball glass</option>
+                                                <option>Coffee mug</option>
+                                                <option>Tea cup</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+
+                                        <div className="col-span-3 sm:col-span-3">
+                                            <label htmlFor="position" className="block text-sm font-medium text-white">
                                                 YOUR ALIAS
                                             </label>
                                             <div className="mt-1 flex rounded-md shadow-sm">
@@ -234,7 +288,7 @@ const CreateCocktail = () => {
                                         </div>
 
                                         <div className="mx-auto col-span-4">
-                                            {(!name || !description || ingredients?.length < 1) &&
+                                            {(!name || !description || ingredients?.length < 1 || !category || !glassType) &&
                                                 <button
                                                     type="button"
                                                     className="border-gray-400 text-lg my-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
@@ -242,7 +296,7 @@ const CreateCocktail = () => {
                                                 >
                                                     <span className="text-gray-500" style={{ width: '100%' }}>Create Cocktail</span>
                                                 </button>}
-                                            {(name && description && ingredients?.length > 0) && <button
+                                            {(name && description && ingredients?.length > 0 && category && glassType) && <button
                                                 type="button"
                                                 className="hover:bg-lime-200 neon-box-green text-lg my-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                                                 style={{ width: '100%' }}
@@ -251,7 +305,7 @@ const CreateCocktail = () => {
                                                 {!loading && <span style={{ width: '100%' }}>Create Cocktail</span>}
                                                 {loading && <Loading></Loading>}
                                             </button>}
-                                            {error && <p className='text-red-500 text-center'>Your cocktail didn't mix properly :/ Try again?</p>}
+                                            {error && <p className='text-red-500 text-center'>Your drink didn't mix properly :/ Try again?</p>}
                                         </div>
                                     </div>
                                 </div>

@@ -17,7 +17,7 @@ const LandingPage: NextPage<LandingPageProps> = (props: any) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="flex pb-3" style={{ backgroundSize: 'cover', backgroundPosition: 'center', flexFlow: 'column', minHeight: '60px', borderWidth: '4px', borderTop: '0', borderLeft: '0', borderRight: '0' }}>
+            <div className="flex pb-3" style={{ backgroundSize: 'cover', backgroundPosition: 'center', flexFlow: 'column', minHeight: '60px', borderWidth: '0', borderTop: '0', borderLeft: '0', borderRight: '0' }}>
                 <div className="flex justify-between">
                     <Link href={'/'}>
                         <div style={{ "marginTop": "0.6rem", "marginLeft": "0.7rem" }}>
@@ -27,7 +27,7 @@ const LandingPage: NextPage<LandingPageProps> = (props: any) => {
                     <h1 className="pt-4 pr-4 font-bold mt-1" style={{ "color": "white" }}>{props?.cocktail?.name}</h1>
                 </div>
             </div>
-            <div className='pb-10 mx-10 md:pt-10 pt-4' style={{ borderWidth: '4px', borderLeft: '0', borderRight: '0', borderTop: '0', borderStyle: 'dashed' }}>
+            <div className='pb-10 mx-10 md:pt-10 pt-4 neon-box-blue' style={{ borderWidth: '0', borderLeft: '0', borderRight: '0', borderTop: '0', borderStyle: 'dashed' }}>
                 <h1 className='text-white text-center font-bold text-md mt-6'>{props?.cocktail?.name}</h1>
                 <p className='text-white text-center font-bold text-md mt-6 md:pb-10'>{props?.cocktail?.description}</p>
             </div>

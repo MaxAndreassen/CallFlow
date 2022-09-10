@@ -92,14 +92,21 @@ const CreateCocktail = () => {
 
     return (<>
 
-        <div className="flex pb-3 mb-6 neon-box-pink" style={{ backgroundSize: 'cover', backgroundPosition: 'center', flexFlow: 'column', minHeight: '60px', borderWidth: '1px', borderTop: '0', borderLeft: '0', borderRight: '0' }}>
+        <div className="flex pb-3" style={{ backgroundSize: 'cover', backgroundPosition: 'center', flexFlow: 'column', minHeight: '60px', borderWidth: '0', borderTop: '0', borderLeft: '0', borderRight: '0' }}>
             <div className="flex justify-between">
                 <Link href={'/'}>
                     <div style={{ "marginTop": "0.6rem", "marginLeft": "0.7rem" }}>
                         <Logo></Logo>
                     </div>
                 </Link>
-                <h1 className="pt-4 pr-4 font-bold mt-1" style={{ "color": "white" }}></h1>
+                <Link href="/">
+            <button
+              type="button"
+              className="m-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-bold text-white hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-green"
+            >
+              Back
+            </button>
+          </Link>
             </div>
         </div>
         <div className="top-title neon-box-pink">Your New Cocktail</div>

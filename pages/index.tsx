@@ -65,22 +65,24 @@ const Home: NextPage = () => {
           </Link>
         </div>
         <h1 className="text-lg top-banner mx-4 display-none display-block-md neon-text">Will you create the next big cocktail?</h1>
-        <div className="search-wrapper">
-          <SearchIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-600 search-icon" aria-hidden="true" />
-          <DebounceInput className="search" type="text" placeholder="find a cocktail" value={searchTerm} debounceTimeout={300} onChange={(e) => { handleSearch(e) }}>
-          </DebounceInput>
-        </div>
-        <div>
-          <select
-            id="department"
-            name="department"
-            autoComplete="department"
-            style={{width: '320px', borderRadius: '999px', height: '30px', fontSize: '12px', lineHeight: 1, fontWeight: 500}}
-            className="mt-3 mx-auto block py-2 px-3 border text-gray-500 border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
-          >
-            <option>🏆 Best Cocktails</option>
-            <option>🆕 Newest Cocktails</option>
-          </select>
+        <div className="flex justify-center" style={{ paddingLeft: "1.5rem", paddingRight: "1.5rem", flexWrap: "wrap"}}>
+          <div className="search-wrapper">
+            <SearchIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-600 search-icon" aria-hidden="true" />
+            <DebounceInput className="search" type="text" placeholder="find a cocktail" value={searchTerm} debounceTimeout={300} onChange={(e) => { handleSearch(e) }}>
+            </DebounceInput>
+          </div>
+          <div>
+            <select
+              id="department"
+              name="department"
+              autoComplete="department"
+              style={{ width: '320px', borderRadius: '999px', height: '40px', fontWeight: 500 }}
+              className="sort-margin mx-auto block py-2 px-3 border text-gray-500 border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+            >
+              <option>🏆 Best Cocktails</option>
+              <option>🆕 Newest Cocktails</option>
+            </select>
+          </div>
         </div>
       </div>
       {loading && <div className='mx-auto text-center mt-10'>

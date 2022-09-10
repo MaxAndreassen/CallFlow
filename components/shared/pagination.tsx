@@ -12,12 +12,12 @@ export const Pagination: NextPage<PaginationProps> = ({ currentPage, totalCount,
     return (
         <div className="px-4 py-3 flex items-center justify-between border-gray-200 sm:px-6">
             <div className="flex-1 flex items-center justify-between">
-                {/*<div>
-                    <p className="text-sm text-opacity-60">
+                <div style={{marginTop: 'auto'}}>
+                    <p className="text-sm text-opacity-60 text-gray-400">
                         Showing <span className="font-medium">{(currentPage * 10) + 1}</span> to <span className="font-medium">{totalCount < (currentPage + 1) * 10 ? totalCount : (currentPage + 1) * 10}</span> of{' '}
-                        <span className="font-medium">{totalCount}</span> results
+                        <span className="font-medium">{totalCount}</span>
                     </p>
-    </div>*/}
+                </div>
                 <div className="flex-1 flex justify-end">
                     {currentPage > 0 && <a
                         href="#"

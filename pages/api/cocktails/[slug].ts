@@ -1,4 +1,4 @@
-import { connectToDatabase } from '../../../lib/mongodb';
+import clientPromise from "../../../lib/mongodb";
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { sanitize } from 'isomorphic-dompurify';
 
@@ -21,7 +21,8 @@ export default async function handler(
 export const getLandingPage = async (slug: string) => {
     const cleanSlug = sanitize(slug as string);
 
-    let { db } = await connectToDatabase();
+    const client = await clientPromise;
+    const db = client.db(process.env.DB_NAME);
 
     const page = await db
         .collection('cocktails')

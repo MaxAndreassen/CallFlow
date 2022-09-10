@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { connectToDatabase } from "../../../lib/mongodb";
+import clientPromise from "../../../lib/mongodb";
 
 type Data = {
     name: string
@@ -34,7 +34,8 @@ async function deleteVote(
         const ip = forwarded ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
 
         // connect to the database
-        let { db } = await connectToDatabase();
+        const client = await clientPromise;
+        const db = client.db(process.env.DB_NAME);
         // add the post
 
         const cocktail = await db
@@ -87,7 +88,8 @@ async function postVote(
         const ip = forwarded ? forwarded.split(/, /)[0] : req.socket.remoteAddress
 
         // connect to the database
-        let { db } = await connectToDatabase();
+        const client = await clientPromise;
+        const db = client.db(process.env.DB_NAME);
         // add the post
 
         const cocktail = await db
@@ -142,7 +144,8 @@ async function checkVote(
         const ip = forwarded ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
 
         // connect to the database
-        let { db } = await connectToDatabase();
+        const client = await clientPromise;
+        const db = client.db(process.env.DB_NAME);
         // add the post
         const voteCount = await db.collection('votes')
             .count({ ip: ip, cocktailId: cocktailId })

@@ -1,6 +1,6 @@
 import { sanitize } from "isomorphic-dompurify";
 import { NextApiRequest, NextApiResponse } from "next";
-import { connectToDatabase } from "../../../lib/mongodb";
+import clientPromise from "../../../lib/mongodb";
 
 type Data = {
     name: string
@@ -26,8 +26,8 @@ async function postCocktail(
     res: NextApiResponse
 ) {
     try {
-        // connect to the database
-        let { db } = await connectToDatabase();
+        const client = await clientPromise;
+        const db = client.db(process.env.DB_NAME);
         // add the post
         await db.collection('cocktails').insertOne(JSON.parse(req.body));
         // return a message
@@ -63,7 +63,8 @@ async function getCocktails(
             cleanPage = 0;
 
         // connect to the database
-        let { db } = await connectToDatabase();
+        const client = await clientPromise;
+        const db = client.db(process.env.DB_NAME);
         // fetch the posts
         let posts;
         let count = 0;

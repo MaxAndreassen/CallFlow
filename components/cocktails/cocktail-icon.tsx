@@ -83,3 +83,46 @@ export const getNeonHoverColour = (category: any) => {
 
     return 'hover:bg-blue-300';
 };
+
+export const timeAgo = (dateString: string) => {
+    const date = new Date(dateString);
+
+    //@ts-ignore
+    const difference = (new Date() - date);
+    const diffTime = Math.abs(difference);
+
+    const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
+
+    if (diffYears > 0)
+        return `${diffYears} year${diffYears == 1 ? '' : 's'} old`;
+
+    const diffMonths = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 30));
+
+    if (diffMonths > 0)
+        return `${diffMonths} month${diffMonths == 1 ? '' : 's'}  old`;
+
+
+    const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+
+    if (diffWeeks > 0)
+        return `${diffWeeks} week${diffWeeks == 1 ? '' : 's'} old`;
+
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays > 0)
+        return `${diffDays} day${diffDays == 1 ? '' : 's'} old`;
+
+    const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+
+    if (diffHours > 0)
+        return `${diffHours} hour${diffHours == 1 ? '' : 's'} old`;
+
+    const diffMinutes = Math.floor(diffTime / (1000 * 60));
+
+    if (diffMinutes > 0)
+        return `${diffMinutes} minute${diffMinutes == 1 ? '' : 's'} old`;
+
+    const diffSeconds = Math.floor(diffTime / (1000));
+
+    return `${diffSeconds} second${diffSeconds == 1 ? '' : 's'} old`;
+}

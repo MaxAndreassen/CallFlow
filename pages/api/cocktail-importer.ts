@@ -1,10 +1,10 @@
 import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import { stringify } from "querystring";
-import { connectToDatabase } from "../../lib/mongodb";
 import { uuidv4 } from "./votes/[cocktailId]";
 import fsPromises from 'fs/promises';
 import path from 'path';
+import clientPromise from "../../lib/mongodb";
 
 type Data = {
     name: string
@@ -92,7 +92,8 @@ async function importCocktails(
         .then(async (data: Import) => {
             try {
                 // connect to the database
-                let { db } = await connectToDatabase();
+                const client = await clientPromise;
+                const db = client.db(process.env.DB_NAME);
 
                 for (let i = 7; i < Math.min(data.drinks.length, 14); i++) {
                     const existingCocktail = await db

@@ -2,7 +2,7 @@ import { ArrowCircleUpIcon } from "@heroicons/react/solid";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
-import { CocktailIcon, getNeonColour, getNeonHoverColour } from "./cocktail-icon";
+import { CocktailIcon, getNeonColour, getNeonHoverColour, timeAgo } from "./cocktail-icon";
 
 type Props = {
   cocktail: Cocktail
@@ -18,6 +18,7 @@ interface Cocktail {
   votes: number;
   category: string;
   glassType: string;
+  createdAt: string;
 }
 
 export const CocktailSummary: NextPage<Props> = ({ cocktail }) => {
@@ -90,7 +91,7 @@ export const CocktailSummary: NextPage<Props> = ({ cocktail }) => {
             </h2>
           </div>
           <p className="text-sm font-medium text-gray-300 mt-0.5">{cocktail.description}</p>
-          <p className="mt-1 text-xs text-gray-600">by {cocktail.owner} | {cocktail.category} | {cocktail.glassType}</p>
+          <p className="mt-1 text-xs text-gray-600">by {cocktail.owner} | {cocktail.category} | {cocktail.glassType} | {timeAgo(cocktail.createdAt)}</p>
           <div className="flex justify-left flex-wrap">
             {/*cocktail.ingredients && cocktail.ingredients.map(ingredient =>
             <div className="mr-4 mt-3">

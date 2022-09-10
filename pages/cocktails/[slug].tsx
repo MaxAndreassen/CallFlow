@@ -14,7 +14,8 @@ const LandingPage: NextPage<LandingPageProps> = (props: any) => {
     return (
         <>
             <Head>
-                <title>{props?.cocktail?.name}</title>
+                <title>{props?.cocktail?.name} Cocktail Recipe</title>
+                <meta name="description" content={"Cocktail recipe for " + props?.cocktail?.name + " | " + props?.cocktail?.description}></meta>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 

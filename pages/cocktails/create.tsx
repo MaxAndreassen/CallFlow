@@ -92,7 +92,7 @@ const CreateCocktail = () => {
 
     return (<>
 
-        <div className="flex pb-3" style={{ backgroundSize: 'cover', backgroundPosition: 'center', flexFlow: 'column', minHeight: '60px', borderWidth: '4px', borderTop: '0', borderLeft: '0', borderRight: '0' }}>
+        <div className="flex pb-3 mb-6 neon-box-pink" style={{ backgroundSize: 'cover', backgroundPosition: 'center', flexFlow: 'column', minHeight: '60px', borderWidth: '1px', borderTop: '0', borderLeft: '0', borderRight: '0' }}>
             <div className="flex justify-between">
                 <Link href={'/'}>
                     <div style={{ "marginTop": "0.6rem", "marginLeft": "0.7rem" }}>
@@ -102,12 +102,12 @@ const CreateCocktail = () => {
                 <h1 className="pt-4 pr-4 font-bold mt-1" style={{ "color": "white" }}></h1>
             </div>
         </div>
-        <div className="top-title">Your New Cocktail</div>
-        <div className="p-4" style={{backgroundColor: '#e5e7eb'}}>
+        <div className="top-title neon-box-pink">Your New Cocktail</div>
+        <div className="p-4">
             <div className="lg:grid lg:grid-cols-4 md:gap-y=6 mb-14 mt-4">
                 <div className="lg:col-span-1">
                 </div>
-                <div className="lg:col-span-2">
+                <div className="lg:col-span-2 neon-box-pink">
                     <div className="sm:px-0">
                         <div>
                             <div className="shadow sm:rounded-md sm:overflow-hidden">
@@ -195,13 +195,13 @@ const CreateCocktail = () => {
                                                     <button
                                                         type="button"
                                                         onClick={() => addIngredient()}
-                                                        className="text-black bg-gray-400 text-lg inline-flex items-center py-2 border border-transparent rounded-md shadow-sm text-xs p-3 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                                                        className="border-gray-500 text-black text-lg inline-flex items-center py-2 border border-transparent rounded-md shadow-sm text-xs p-3 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                                                     ><span className="text-gray-500">Add Extra Ingredient</span>
                                                     </button> :
                                                     <button
                                                         type="button"
                                                         onClick={() => addIngredient()}
-                                                        className="text-white text-lg inline-flex items-center py-2 border border-transparent rounded-md shadow-sm text-xs p-3 font-medium bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                                                        className="hover:bg-lime-200 neon-box-green text-white text-lg inline-flex items-center py-2 border border-transparent rounded-md shadow-sm text-xs p-3 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                                                     >Add Extra Ingredient
                                                     </button>}
                                             </div>
@@ -230,14 +230,14 @@ const CreateCocktail = () => {
                                             {(!name || !description || ingredients?.length < 1) &&
                                                 <button
                                                     type="button"
-                                                    className="text-lg my-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                                                    className="border-gray-400 text-lg my-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                                                     style={{ width: '100%' }}
                                                 >
                                                     <span className="text-gray-500" style={{ width: '100%' }}>Create Cocktail</span>
                                                 </button>}
                                             {(name && description && ingredients?.length > 0) && <button
                                                 type="button"
-                                                className="text-lg my-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-lime-600 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                                                className="hover:bg-lime-200 neon-box-green text-lg my-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                                                 style={{ width: '100%' }}
                                                 onClick={handleCocktail}
                                             >

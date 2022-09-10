@@ -181,7 +181,7 @@ html {
 .top-title {
     position: absolute;
     left: calc(50% - 67.17px);
-    top: 77px;
+    top: 94px;
     font-size: 11px;
     border: 4px solid black;
     padding: 0.5rem;
@@ -190,4 +190,32 @@ html {
     font-weight: bold;
     border-radius: 20px;
     background-color: #e5e7eb;
+}
+
+.neon-text {
+    color: #fff;
+    text-shadow: 0 0 100px #000000, 0 0 300px #fff, 0 0 300px #fff, 0 0 50px #bc13fe, 0 0 40px #bc13fe, 0 0 100px #bc13fe, 0 0 200px #bc13fe, 0 0 100px #bc13fe;
+}
+
+.neon-box-pink {
+    animation: pulsate 1.5s infinite alternate;
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 0.8rem #bc13fe, 0 0 0.5rem #bc13fe, 0 0 0.3rem #bc13fe, inset 0 0 0.5rem #bc13fe;
+
+}
+
+.neon-box-orange {
+    animation: pulsate 1.5s infinite alternate;
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 0.8rem #ffb500, 0 0 0.5rem #ffb500, 0 0 0.3rem #ffb500, inset 0 0 0.5rem #ffb500;
+
+}
+
+.neon-box-green {
+    animation: pulsate 1.5s infinite alternate;
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 0.8rem #98ff6a, 0 0 0.5rem #98ff6a, 0 0 0.3rem #98ff6a, inset 0 0 0.5rem #98ff6a;
+
+}
+
+.neon-box-blue {
+    animation: pulsate 1.5s infinite alternate;
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 0.8rem #6a9cff, 0 0 0.5rem #6a9cff, 0 0 0.3rem #6a9cff, inset 0 0 0.5rem #6a9cff;
 }

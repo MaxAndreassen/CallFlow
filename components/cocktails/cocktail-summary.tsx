@@ -2,6 +2,7 @@ import { ArrowCircleUpIcon } from "@heroicons/react/solid";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
+import { CocktailIcon, getNeonColour } from "./cocktail-icon";
 
 type Props = {
   cocktail: Cocktail
@@ -15,6 +16,8 @@ interface Cocktail {
   owner: string;
   ingredients: any[];
   votes: number;
+  category: string;
+  glassType: string;
 }
 
 export const CocktailSummary: NextPage<Props> = ({ cocktail }) => {
@@ -74,9 +77,9 @@ export const CocktailSummary: NextPage<Props> = ({ cocktail }) => {
   }
 
   return (
-    <div key={cocktail.id} style={{ "borderRadius": "8px" }} className="group relative border-4 flex">
+    <div key={cocktail.id} style={{ "borderRadius": "8px" }} className={"group relative flex " + getNeonColour(cocktail?.category)}>
       <div className="group relative px-3 md:px-5 pt-3" style={{ marginBottom: 'auto', marginTop: 'auto' }}>
-        <p className="text-center mb-3">🍸</p>
+        <p className="text-center mb-3"><CocktailIcon category={cocktail?.category}></CocktailIcon></p>
       </div>
       <Link href={"/cocktails/" + cocktail.name}>
         <div className="px-3 flex-grow my-3" style={{ borderWidth: "4px", borderTop: "0", borderBottom: "0", whiteSpace: 'nowrap', overflow: 'hidden' }}>
@@ -87,7 +90,7 @@ export const CocktailSummary: NextPage<Props> = ({ cocktail }) => {
             </h2>
           </div>
           <p className="text-sm font-medium text-gray-300 mt-0.5">{cocktail.description}</p>
-          <p className="mt-1 text-xs text-gray-600">by {cocktail.owner}</p>
+          <p className="mt-1 text-xs text-gray-600">by {cocktail.owner} | {cocktail.category} | {cocktail.glassType}</p>
           <div className="flex justify-left flex-wrap">
             {/*cocktail.ingredients && cocktail.ingredients.map(ingredient =>
             <div className="mr-4 mt-3">

@@ -21,14 +21,14 @@ export const Pagination: NextPage<PaginationProps> = ({ currentPage, totalCount,
                 <div className="flex-1 flex justify-end">
                     {currentPage > 0 && <a
                         href="#"
-                        className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                        className="neon-box-blue relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-50"
                         onClick={onPrevClicked}
                     >
                         Prev
                     </a>}
                     {totalCount > (currentPage + 1) * 10 && <a
                         href="#"
-                        className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                        className="neon-box-blue ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-50"
                         onClick={onNextClicked}
                     >
                         Next

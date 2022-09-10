@@ -58,13 +58,13 @@ const Home: NextPage = () => {
           <Link href="/cocktails/create">
             <button
               type="button"
-              className="m-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-lime-600 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+              className="m-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-bold text-white hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-green"
             >
               Create Cocktail
             </button>
           </Link>
         </div>
-        <h1 className="text-lg top-banner mx-4 display-none display-block-md">Will you create the next big cocktail?</h1>
+        <h1 className="text-lg top-banner mx-4 display-none display-block-md neon-text">Will you create the next big cocktail?</h1>
         <div className="search-wrapper">
           <SearchIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-600 search-icon" aria-hidden="true" />
           <DebounceInput className="search" type="text" placeholder="find a cocktail" value={searchTerm} debounceTimeout={300} onChange={(e) => { handleSearch(e) }}>

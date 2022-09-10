@@ -10,8 +10,8 @@ type CocktailIngredientsProps = {
 
 export const CocktailIngredients: NextPage<CocktailIngredientsProps> = ({ ingredients, showCancel, onCancel }) => {
     return (<>
-        {ingredients?.map(p =>
-            <div className="mr-3"><CocktailMeasurement amount={p.amount} name={p.name} showCancel={showCancel} onCancel={onCancel}></CocktailMeasurement>
+        {ingredients.sort((a, b) => b.amount - a.amount)?.map(p =>
+            <div className="mr-3" style={{minWidth: "130px"}}><CocktailMeasurement amount={p.amount} name={p.name} showCancel={showCancel} onCancel={onCancel}></CocktailMeasurement>
             </div>)}
     </>)
 };

@@ -207,6 +207,17 @@ html {
     background-color: #e5e7eb;
 }
 
+.top-title-cocktail-page {
+    font-size: 11px;
+    border: 4px solid black;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-weight: bold;
+    border-radius: 20px;
+    background-color: #e5e7eb;
+}
+
 .neon-text {
     color: #fff;
     text-shadow: 0 0 100px #000000, 0 0 300px #fff, 0 0 300px #fff, 0 0 50px #bc13fe, 0 0 40px #bc13fe, 0 0 100px #bc13fe, 0 0 200px #bc13fe, 0 0 100px #bc13fe;

@@ -75,7 +75,7 @@ const Home: NextPage = () => {
           </Link>
         </div>
         <h1 className="text-lg top-banner mx-4 display-none display-block-md neon-text">Will you create the next big cocktail?</h1>
-        <div className="flex justify-center" style={{ paddingLeft: "1.5rem", paddingRight: "1.5rem", flexWrap: "wrap"}}>
+        <div className="flex justify-center" style={{ paddingLeft: "1.5rem", paddingRight: "1.5rem", flexWrap: "wrap" }}>
           <div className="search-wrapper">
             <SearchIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-600 search-icon" aria-hidden="true" />
             <DebounceInput className="search" type="text" placeholder="find a cocktail" value={searchTerm} debounceTimeout={300} onChange={(e) => { handleSearch(e) }}>

@@ -2,7 +2,7 @@ import { ArrowCircleUpIcon } from "@heroicons/react/solid";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
-import { CocktailIcon, getNeonColour } from "./cocktail-icon";
+import { CocktailIcon, getNeonColour, getNeonHoverColour } from "./cocktail-icon";
 
 type Props = {
   cocktail: Cocktail
@@ -77,7 +77,7 @@ export const CocktailSummary: NextPage<Props> = ({ cocktail }) => {
   }
 
   return (
-    <div key={cocktail.id} style={{ "borderRadius": "8px" }} className={"group relative flex " + getNeonColour(cocktail?.category)}>
+    <div key={cocktail.id} style={{ "borderRadius": "8px" }} className={"group relative flex " + getNeonColour(cocktail?.category) + " " + getNeonHoverColour(cocktail?.category)}>
       <div className="group relative px-3 md:px-5 pt-3" style={{ marginBottom: 'auto', marginTop: 'auto' }}>
         <p className="text-center mb-3"><CocktailIcon category={cocktail?.category}></CocktailIcon></p>
       </div>

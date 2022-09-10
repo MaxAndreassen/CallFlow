@@ -15,6 +15,7 @@ const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [cocktails, setCocktails] = useState([]);
   const [count, setCount] = useState(0);
+  const [sort, setSort] = useState('best');
 
   useEffect(() => {
     if (!router.isReady)
@@ -22,6 +23,7 @@ const Home: NextPage = () => {
 
     search(router.query.q as string);
     setSearchTerm(router.query.q as string);
+    setSort(router.query.s as string);
 
   }, [router.isReady, router.query]);
 
@@ -30,8 +32,9 @@ const Home: NextPage = () => {
 
     const search = !searchWord ? '' : searchWord;
     const page = router.query.hasOwnProperty('p') ? router.query.p : 0;
+    const sort = router.query.hasOwnProperty('s') ? router.query.s : 'best';
 
-    fetch(`/api/cocktails/full?q=${search}&p=${page}`)
+    fetch(`/api/cocktails/full?q=${search}&p=${page}&s=${sort}`)
       .then((res) => res.json())
       .then((data) => {
         setCocktails(data['message']);
@@ -44,9 +47,16 @@ const Home: NextPage = () => {
   async function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     Router.push({
       pathname: process.env.BASE_URL,
-      query: { q: e.target.value, p: 0 },
+      query: { q: e.target.value, p: 0, s: router.query.s },
     });
   }
+
+  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    Router.push({
+      pathname: process.env.BASE_URL,
+      query: { q: router.query.q, p: 0, s: e.target.value },
+    });
+  };
 
   return (
     <>
@@ -75,12 +85,14 @@ const Home: NextPage = () => {
             <select
               id="department"
               name="department"
+              value={sort}
               autoComplete="department"
               style={{ width: '320px', borderRadius: '999px', height: '40px', fontWeight: 500 }}
+              onChange={(e) => handleSort(e)}
               className="sort-margin mx-auto block py-2 px-3 border text-gray-500 border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
             >
-              <option>🏆 Best Cocktails</option>
-              <option>🆕 Newest Cocktails</option>
+              <option value="best">🏆 Best Cocktails</option>
+              <option value="new">🆕 Newest Cocktails</option>
             </select>
           </div>
         </div>

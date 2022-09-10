@@ -55,3 +55,31 @@ export const getNeonColour = (category: any) => {
 
     return 'neon-box-blue';
 };
+
+export const getNeonHoverColour = (category: any) => {
+    if (category == "Beer")
+        return 'hover:bg-amber-300';
+
+    if (category == "Cocktail")
+        return 'hover:bg-lime-300';
+
+    if (category == "Ordinary Drink")
+        return 'hover:bg-lime-300';
+
+    if (category == "Coffee / Tea")
+        return 'hover:bg-amber-300';
+
+    if (category == "Shot")
+        return 'hover:bg-amber-300';
+
+    if (category == "Shake")
+        return 'hover:bg-fuchsia-400';
+
+    if (category == "Punch / Party Drink")
+        return 'hover:bg-fuchsia-400';
+
+    if (category == "Soft Drink")
+        return 'hover:bg-fuchsia-400';
+
+    return 'hover:bg-blue-300';
+};

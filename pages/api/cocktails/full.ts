@@ -53,8 +53,10 @@ async function getCocktails(
 
     try {
         const query = req.query;
-        const { q, p } = query;
+        const { q, p, s } = query;
         const cleanQuery = sanitize(q as string);
+        const cleanSort = sanitize(s as string);
+
         let cleanPage = Number.parseInt(p as string);
 
         if (cleanPage < 0)
@@ -66,11 +68,11 @@ async function getCocktails(
         let posts;
         let count = 0;
 
-        if (!!cleanQuery) {
+        if (!!cleanQuery && cleanSort == 'new') {
             posts = await db
                 .collection('cocktails')
                 .find({ $text: { $search: cleanQuery } })
-                .sort({ votes: -1 })
+                .sort({ createdAt: 1, name: 1 })
                 .skip(cleanPage * pageSize)
                 .limit(pageSize)
                 .toArray();
@@ -78,12 +80,36 @@ async function getCocktails(
             count = await db
                 .collection('cocktails')
                 .count({ $text: { $search: cleanQuery } });
+        } else if (!!cleanQuery) {
+            posts = await db
+                .collection('cocktails')
+                .find({ $text: { $search: cleanQuery } })
+                .sort({ votes: -1, name: 1 })
+                .skip(cleanPage * pageSize)
+                .limit(pageSize)
+                .toArray();
+
+            count = await db
+                .collection('cocktails')
+                .count({ $text: { $search: cleanQuery } });
+        } else if (!cleanQuery && cleanSort == 'new') {
+            posts = await db
+                .collection('cocktails')
+                .find({})
+                .sort({ createdAt: 1, name: 1 })
+                .skip(cleanPage * pageSize)
+                .limit(pageSize)
+                .toArray();
+
+            count = await db
+                .collection('cocktails')
+                .count({});
         }
         else {
             posts = await db
                 .collection('cocktails')
                 .find({})
-                .sort({ votes: -1 })
+                .sort({ votes: -1, name: 1 })
                 .skip(cleanPage * pageSize)
                 .limit(pageSize)
                 .toArray();

@@ -2,35 +2,36 @@ import { NextPage } from "next";
 
 type IndividualMeasurementProps = {
     amount: Number;
+    large?: boolean;
 }
 
-export const IndividualMeasurement: NextPage<IndividualMeasurementProps> = ({ amount }) => {
+export const IndividualMeasurement: NextPage<IndividualMeasurementProps> = ({ amount, large = false }) => {
     return (<div className="mr-0.5 mt-1">
         <div className="flex">
             {amount > 0
-                ? <div className="top-left-quarter-circle">
+                ? <div className={!large ? "top-left-quarter-circle" : "top-left-quarter-circle-large"}>
                 </div>
-                : <div className="top-left-quarter-circle" style={{ backgroundColor: "transparent", borderColor: "transparent" }}>
+                : <div className={!large ? "top-left-quarter-circle" : "top-left-quarter-circle-large"} style={{ backgroundColor: "transparent", borderColor: "gray" }}>
                 </div>
             }
             {amount > 0.75
-                ? <div className="top-right-quarter-circle">
+                ? <div className={!large ? "top-right-quarter-circle" : "top-right-quarter-circle-large"}>
                 </div>
-                : <div className="top-right-quarter-circle" style={{ backgroundColor: "transparent", borderColor: "transparent" }}>
+                : <div className={!large ? "top-right-quarter-circle" : "top-right-quarter-circle-large"} style={{ backgroundColor: "transparent", borderColor: "gray" }}>
                 </div>
             }
         </div>
         <div className="flex">
             {amount > 0.25
-                ? <div className="bottom-left-quarter-circle">
+                ? <div className={!large ? "bottom-left-quarter-circle" : "bottom-left-quarter-circle-large"}>
                 </div>
-                : <div className="bottom-left-quarter-circle" style={{ backgroundColor: "transparent", borderColor: "transparent" }}>
+                : <div className={!large ? "bottom-left-quarter-circle" : "bottom-left-quarter-circle-large"} style={{ backgroundColor: "transparent", borderColor: "gray" }}>
                 </div>
             }
             {amount > 0.5
-                ? <div className="bottom-right-quarter-circle">
+                ? <div className={!large ? "bottom-right-quarter-circle" : "bottom-right-quarter-circle-large"}>
                 </div>
-                : <div className="bottom-right-quarter-circle" style={{ backgroundColor: "transparent", borderColor: "transparent" }}>
+                : <div className={!large ? "bottom-right-quarter-circle" : "bottom-right-quarter-circle-large"} style={{ backgroundColor: "transparent", borderColor: "gray" }}>
                 </div>
             }
         </div>

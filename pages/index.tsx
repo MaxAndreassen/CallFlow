@@ -34,12 +34,12 @@ const Home: NextPage = () => {
     let data = await response.json();
 
     if (data.success) {
-        router.push(`cocktails/${data.message.name}`);
+      router.push(`cocktails/${data.message.name}`);
     } else {
-        // set the error
-        console.log(data.message);
+      // set the error
+      console.log(data.message);
     }
-}
+  }
 
   const search = (searchWord: string) => {
     setLoading(true);
@@ -80,18 +80,18 @@ const Home: NextPage = () => {
             <Logo></Logo>
           </div>
           <div className='flex'>
-              <button
-                type="button"
-                style={{whiteSpace: 'nowrap'}}
-                onClick={() => randomCocktail()}
-                className="my-3 mr-3 inline-flex items-center px-2 md:px-4 py-2 border border-transparent rounded-md shadow-sm md:text-sm text-xs font-bold text-white hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-blue"
-              >
-                Random 🍸
-              </button>
+            <button
+              type="button"
+              style={{ whiteSpace: 'nowrap' }}
+              onClick={() => randomCocktail()}
+              className="my-3 mr-3 inline-flex items-center px-2 md:px-4 py-2 border border-transparent rounded-md shadow-sm md:text-sm text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-blue hover:bg-blue-300"
+            >
+              Random 🍸
+            </button>
             <Link href="/cocktails/create">
               <button
                 type="button"
-                style={{whiteSpace: 'nowrap'}}
+                style={{ whiteSpace: 'nowrap' }}
                 className="my-3 mr-3 inline-flex items-center px-2 md:px-4 py-2 border border-transparent rounded-md shadow-sm md:text-sm text-xs font-bold text-white hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-green"
               >
                 Create 🍸

@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { CocktailIcon, getNeonColour } from '../../components/cocktails/cocktail-icon';
 import { CocktailIngredients } from '../../components/cocktails/cocktail-ingredients';
 import { AffiliateLink } from '../../components/shared/affiliate-link';
@@ -12,6 +13,20 @@ type LandingPageProps = {
 }
 
 const LandingPage: NextPage<LandingPageProps> = (props: any) => {
+    const router = useRouter();
+    const randomCocktail = async () => {
+        let response = await fetch('/api/cocktails/random');
+
+        // get the data
+        let data = await response.json();
+
+        if (data.success) {
+            router.push(`${data.message.name}`);
+        } else {
+            // set the error
+            console.log(data.message);
+        }
+    }
     return (
         <>
             <Head>
@@ -27,14 +42,24 @@ const LandingPage: NextPage<LandingPageProps> = (props: any) => {
                             <Logo></Logo>
                         </div>
                     </Link>
-                    <Link href="/">
+                    <div className='flex'>
                         <button
                             type="button"
-                            className="m-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-bold text-white hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-green"
+                            style={{ whiteSpace: 'nowrap' }}
+                            onClick={() => randomCocktail()}
+                            className="my-3 mr-3 inline-flex items-center px-2 md:px-4 py-2 border border-transparent rounded-md shadow-sm md:text-sm text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-blue hover:bg-blue-300"
                         >
-                            Back
+                            Random 🍸
                         </button>
-                    </Link>
+                        <Link href="/">
+                            <button
+                                type="button"
+                                className="mr-3 my-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-bold text-white hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-green"
+                            >
+                                Back
+                            </button>
+                        </Link>
+                    </div>
                 </div>
             </div>
             <div className='flex' style={{ height: '0px' }}>

@@ -27,6 +27,20 @@ const Home: NextPage = () => {
 
   }, [router.isReady, router.query]);
 
+  const randomCocktail = async () => {
+    let response = await fetch('/api/cocktails/random');
+
+    // get the data
+    let data = await response.json();
+
+    if (data.success) {
+        router.push(`cocktails/${data.message.name}`);
+    } else {
+        // set the error
+        console.log(data.message);
+    }
+}
+
   const search = (searchWord: string) => {
     setLoading(true);
 
@@ -62,20 +76,31 @@ const Home: NextPage = () => {
     <>
       <div className="flex" style={{ backgroundSize: 'cover', backgroundPosition: 'center', flexFlow: 'column' }}>
         <div className="flex justify-between">
-          <div style={{ "marginTop": "0.6rem", "marginLeft": "0.7rem" }}>
+          <div style={{ "marginTop": "0.5rem", "marginLeft": "0.7rem" }}>
             <Logo></Logo>
           </div>
-          <Link href="/cocktails/create">
-            <button
-              type="button"
-              className="m-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-bold text-white hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-green"
-            >
-              Create Cocktail
-            </button>
-          </Link>
+          <div className='flex'>
+              <button
+                type="button"
+                style={{whiteSpace: 'nowrap'}}
+                onClick={() => randomCocktail()}
+                className="my-3 mr-3 inline-flex items-center px-2 md:px-4 py-2 border border-transparent rounded-md shadow-sm md:text-sm text-xs font-bold text-white hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-blue"
+              >
+                Random 🍸
+              </button>
+            <Link href="/cocktails/create">
+              <button
+                type="button"
+                style={{whiteSpace: 'nowrap'}}
+                className="my-3 mr-3 inline-flex items-center px-2 md:px-4 py-2 border border-transparent rounded-md shadow-sm md:text-sm text-xs font-bold text-white hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 neon-box-green"
+              >
+                Create 🍸
+              </button>
+            </Link>
+          </div>
         </div>
         <h1 className="text-lg top-banner mx-4 display-none display-block-md neon-text">Will you create the next big cocktail?</h1>
-        <div className="flex justify-center" style={{ paddingLeft: "1.5rem", paddingRight: "1.5rem", flexWrap: "wrap" }}>
+        <div className="flex justify-center mb-2 md:mb-0" style={{ paddingLeft: "1.5rem", paddingRight: "1.5rem", flexWrap: "wrap" }}>
           <div className="search-wrapper">
             <SearchIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-600 search-icon" aria-hidden="true" />
             <DebounceInput className="search" type="text" placeholder="find a cocktail" value={searchTerm} debounceTimeout={300} onChange={(e) => { handleSearch(e) }}>

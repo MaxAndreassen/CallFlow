@@ -84,6 +84,20 @@ html {
     }
 }
 
+@media (min-width: 400px) {
+    .display-none-sm {
+        display: none;
+    }
+
+    .display-flex-sm {
+        display: flex;
+    }
+
+    .display-block-sm {
+        display: block;
+    }
+}
+
 .top-banner {
     text-align: center;
     color: white;

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { CocktailIcon, getNeonColour } from '../../components/cocktails/cocktail-icon';
 import { CocktailIngredients } from '../../components/cocktails/cocktail-ingredients';
+import { AffiliateLink } from '../../components/shared/affiliate-link';
 import { Logo } from '../../components/shared/logo';
 import { getLandingPage } from '../api/cocktails/[slug]';
 
@@ -56,9 +57,9 @@ const LandingPage: NextPage<LandingPageProps> = (props: any) => {
                                                 <p className='text-white text-center font-bold text-sm mt-6 md:pb-6' style={{ whiteSpace: "pre-wrap" }}>{props?.cocktail?.description}</p>
                                             </div>
                                             <div className='col-span-3'>
-                                                <div className='flex justify-center flex-wrap gap-y-6 gap-x-2 md:gap-12 md:pt-4 mb-7 mx-4'>
+                                                <div className='flex justify-center flex-wrap gap-y-6 gap-x-2 md:gap-12 md:pt-4 xl:mb-7 mx-4'>
                                                     <CocktailIngredients ingredients={props?.cocktail?.ingredients} large={true}></CocktailIngredients>
-                                                    {props?.cocktail?.ingredients?.length % 2 == 1 ? <div className="mr-3" style={{width: '210px'}}> </div> : <></>}
+                                                    {props?.cocktail?.ingredients?.length % 2 == 1 ? <div className="mr-3" style={{ width: '210px' }}> </div> : <></>}
                                                 </div>
                                             </div>
                                             <div className="col-span-3 sm:col-span-3 border-2 pb-2 md:pb-2" style={{ borderLeft: 0, borderRight: 0, borderBottom: 0 }}>
@@ -69,6 +70,13 @@ const LandingPage: NextPage<LandingPageProps> = (props: any) => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="lg:col-span-1">
+                    </div>
+                    <div className="lg:col-span-1">
+                    </div>
+                    <div className="lg:col-span-2 p-4 mt-4 neon-box-pink hover:bg-fuchsia-400">
+                        <AffiliateLink></AffiliateLink>
                     </div>
                 </div>
             </div>

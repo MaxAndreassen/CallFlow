@@ -26,10 +26,26 @@ async function postCocktail(
     res: NextApiResponse
 ) {
     try {
+        const forwarded = req.headers["x-forwarded-for"] as string;
+        const ip = forwarded ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
+
+        const insert = JSON.parse(req.body);
+
+        try {
+            const data = await (await fetch(`http://ip-api.com/json/` + ip)).json();
+
+            insert.country = data.country;
+            insert.regionName = data.regionName;
+            insert.city = data.city;
+            insert.ip = ip;
+        } catch (error) {
+
+        }
+
         const client = await clientPromise;
         const db = client.db(process.env.DB_NAME);
         // add the post
-        await db.collection('cocktails').insertOne(JSON.parse(req.body));
+        await db.collection('cocktails').insertOne(insert);
         // return a message
         return res.json({
             message: 'Cocktail Successfully Created',

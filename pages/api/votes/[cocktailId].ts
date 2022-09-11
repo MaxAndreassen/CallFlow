@@ -85,7 +85,7 @@ async function postVote(
         const { cocktailId } = req.query;
 
         const forwarded = req.headers["x-forwarded-for"] as string;
-        const ip = forwarded ? forwarded.split(/, /)[0] : req.socket.remoteAddress
+        const ip = forwarded ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
 
         // connect to the database
         const client = await clientPromise;

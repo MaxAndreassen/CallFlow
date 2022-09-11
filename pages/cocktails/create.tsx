@@ -11,6 +11,7 @@ const CreateCocktail = () => {
     interface Ingredient {
         name: string;
         amount: number;
+        unitOfMeasure: string;
     }
 
     const router = useRouter();
@@ -28,6 +29,7 @@ const CreateCocktail = () => {
 
     const [tempIngredientName, setTempIngredientName] = useState('');
     const [tempIngredientAmount, setTempIngredientAmount] = useState('');
+    const [tempIngredientUnit, setTempIngredientUnit] = useState('');
 
     const addIngredient = () => {
         if (!tempIngredientAmount || !tempIngredientName)
@@ -35,13 +37,15 @@ const CreateCocktail = () => {
 
         ingredients.push({
             name: tempIngredientName,
-            amount: Number.parseFloat(tempIngredientAmount)
+            amount: Number.parseFloat(tempIngredientAmount),
+            unitOfMeasure: tempIngredientUnit,
         });
 
         setIngredients(ingredients);
 
         setTempIngredientAmount('');
         setTempIngredientName('');
+        setTempIngredientUnit('');
     }
 
     const removeIngredient = (name: string) => {
@@ -116,10 +120,10 @@ const CreateCocktail = () => {
         </div>
         <div className="top-title neon-box-pink">Your New Cocktail</div>
         <div className="p-4">
-            <div className="lg:grid lg:grid-cols-4 md:gap-y=6 mb-14 mt-4">
+            <div className="lg:grid lg:grid-cols-5 md:gap-y=6 mb-14 mt-4">
                 <div className="lg:col-span-1">
                 </div>
-                <div className="lg:col-span-2 neon-box-pink">
+                <div className="lg:col-span-3 neon-box-pink">
                     <div className="sm:px-0">
                         <div>
                             <div className="shadow sm:rounded-md sm:overflow-hidden">
@@ -161,7 +165,7 @@ const CreateCocktail = () => {
                                             </p>
                                         </div>
 
-                                        <div className="grid grid-cols-2 gap-2 col-span-3 sm:col-span-3">
+                                        <div className="grid grid-cols-3 gap-2 col-span-3 sm:col-span-3">
                                             <div className="col-span-3 sm:col-span-3">
                                                 <label htmlFor="position" className="block text-sm font-medium  text-white">
                                                     INGREDIENTS*
@@ -170,19 +174,6 @@ const CreateCocktail = () => {
 
                                             <div className="col-span-3 sm:col-span-3 flex">
                                                 <CocktailIngredients onCancel={(name: string) => removeIngredient(name)} showCancel={true} ingredients={ingredients}></CocktailIngredients>
-                                            </div>
-                                            <div className="col-span-3 sm:col-span-1">
-                                                <div className="mt-1 flex rounded-md shadow-sm col-span-1">
-                                                    <input
-                                                        type="text"
-                                                        name="temp-ingredient-name"
-                                                        id="temp-ingredient-name"
-                                                        value={tempIngredientName}
-                                                        onChange={(e) => setTempIngredientName(e.target.value)}
-                                                        className="focus:ring-yellow-500 focus:border-yellow-500 flex-1 block w-full rounded sm:text-sm border-gray-300"
-                                                        placeholder="Ingredient Name"
-                                                    />
-                                                </div>
                                             </div>
 
                                             <div className="col-span-3 sm:col-span-1">
@@ -194,14 +185,42 @@ const CreateCocktail = () => {
                                                         value={tempIngredientAmount}
                                                         onChange={(e) => setTempIngredientAmount(e.target.value)}
                                                         className="focus:ring-yellow-500 focus:border-yellow-500 flex-1 block w-full rounded sm:text-sm border-gray-300"
-                                                        placeholder="Ingredient Amount (in parts)"
+                                                        placeholder="Ingredient Amount (e.g. 2)"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="col-span-3 sm:col-span-1">
+                                                <div className="mt-1 flex rounded-md shadow-sm col-span-1">
+                                                    <input
+                                                        type="text"
+                                                        name="temp-ingredient-unit"
+                                                        id="temp-ingredient-unit"
+                                                        value={tempIngredientUnit}
+                                                        onChange={(e) => setTempIngredientUnit(e.target.value)}
+                                                        className="focus:ring-yellow-500 focus:border-yellow-500 flex-1 block w-full rounded sm:text-sm border-gray-300"
+                                                        placeholder="Ingredient Units (e.g parts)"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="col-span-3 sm:col-span-1">
+                                                <div className="mt-1 flex rounded-md shadow-sm col-span-1">
+                                                    <input
+                                                        type="text"
+                                                        name="temp-ingredient-name"
+                                                        id="temp-ingredient-name"
+                                                        value={tempIngredientName}
+                                                        onChange={(e) => setTempIngredientName(e.target.value)}
+                                                        className="focus:ring-yellow-500 focus:border-yellow-500 flex-1 block w-full rounded sm:text-sm border-gray-300"
+                                                        placeholder="Ingredient Name (e.g. Rum)"
                                                     />
                                                 </div>
                                             </div>
 
                                             <div className="col-span-3 sm:col-span-3">
                                                 <p className="text-xs text-gray-400 pb-3 pl-2 pr-2">
-                                                    Ingredients are measured in parts (e.g. 2 parts rum, 1 part orange juice, 1 part pineable juice, 0.25 parts grenadine)
+                                                    Add ingredients above in the format: Amount, Measure, Name. Using the example above you would get '2 parts Rum'.
                                                 </p>
                                                 {(!tempIngredientName || !tempIngredientAmount) ?
                                                     <button

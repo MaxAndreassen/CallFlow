@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import { CocktailMeasurement } from "./cocktail-measurement";
 
 type CocktailIconProps = {
     category: string
@@ -20,6 +19,7 @@ export const CocktailIcon: NextPage<CocktailIconProps> = ({ category }) => {
             category != "Ordinary Drink" &&
             category != "Coffee / Tea" &&
             category != "Shot" &&
+            category != "Old-fashioned glass" &&
             category != "Shake" &&
             category != "Punch / Party Drink" &&
             category != "Soft Drink" &&

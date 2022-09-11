@@ -8,6 +8,7 @@ import { Logo } from '../components/shared/logo';
 import { CocktailSummary } from '../components/cocktails/cocktail-summary';
 import { SearchIcon } from '@heroicons/react/solid';
 import { DebounceInput } from 'react-debounce-input';
+import Head from 'next/head';
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -74,6 +75,11 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Great cocktail recipes from around the world!</title>
+        <meta name="description" content="Great cocktail recipes from all over the world. Everything from rum punch to dry martinis ready for you make, drink, and enjoy."></meta>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="flex" style={{ backgroundSize: 'cover', backgroundPosition: 'center', flexFlow: 'column' }}>
         <div className="flex justify-between">
           <div style={{ "marginTop": "0.5rem", "marginLeft": "0.7rem" }}>

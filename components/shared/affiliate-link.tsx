@@ -20,7 +20,7 @@ export const AffiliateLink: NextPage<AffiliateProps> = () => {
                             borderRadius: "2px"
                         }}></Image>
                     </div>
-                    <p className="text-white text-sm lg:text-xs font-bold mt-2">If you use this link to buy a great cocktail recipe kit on Amazon, then you can get started making this recipe today, and you'll be supporting us too as we'll make a small amount of commission from the sale! 😊</p>
+                    <p className="text-white text-sm lg:text-xs font-bold mt-2">If you use this link to buy a great cocktail recipe kit on Amazon then you can get started making this recipe today, and you'll be supporting us too as we'll make a small amount of commission from the sale! 😊</p>
                 </div>
             </div>
 

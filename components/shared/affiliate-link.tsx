@@ -15,7 +15,7 @@ export const AffiliateLink: NextPage<AffiliateProps> = () => {
                 </div>
                 <div className="pl-0 md:pl-3">
                     <div className="block display-none-md">
-                        <Image src="/images/cocktail-set.jpg" width="310" height="250" className="mx-auto" style={{
+                        <Image src="/images/cocktail-set.jpg" width="330" height="280" className="mx-auto" style={{
                             borderRadius: "2px"
                         }}></Image>
                     </div>

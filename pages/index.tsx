@@ -8,10 +8,13 @@ import { Logo } from '../components/shared/logo';
 import { CocktailSummary } from '../components/cocktails/cocktail-summary';
 import { SearchIcon } from '@heroicons/react/solid';
 import { DebounceInput } from 'react-debounce-input';
+import { usePlausible } from 'next-plausible';
 import Head from 'next/head';
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const plausible = usePlausible();
+
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [cocktails, setCocktails] = useState([]);
@@ -35,6 +38,7 @@ const Home: NextPage = () => {
     let data = await response.json();
 
     if (data.success) {
+      plausible('random-cocktail-buttonclick');
       router.push(`cocktails/${data.message.name}`);
     } else {
       // set the error

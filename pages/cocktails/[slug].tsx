@@ -7,6 +7,7 @@ import { CocktailIngredients } from '../../components/cocktails/cocktail-ingredi
 import { AffiliateLink } from '../../components/shared/affiliate-link';
 import { Logo } from '../../components/shared/logo';
 import { getLandingPage } from '../api/cocktails/[slug]';
+import {usePlausible} from 'next-plausible';
 
 type LandingPageProps = {
     props: { cocktail: any }
@@ -14,6 +15,8 @@ type LandingPageProps = {
 
 const LandingPage: NextPage<LandingPageProps> = (props: any) => {
     const router = useRouter();
+    const plausible = usePlausible();
+
     const randomCocktail = async () => {
         let response = await fetch('/api/cocktails/random');
 
@@ -21,6 +24,7 @@ const LandingPage: NextPage<LandingPageProps> = (props: any) => {
         let data = await response.json();
 
         if (data.success) {
+            plausible('random-cocktail-buttonclick');
             router.push(`${data.message.name}`);
         } else {
             // set the error

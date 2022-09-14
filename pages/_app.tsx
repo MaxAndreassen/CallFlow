@@ -4,6 +4,7 @@ import { Router } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Loading } from '../components/shared/loading';
 import { FullLoading } from '../components/shared/full-loading';
+import PlausibleProvider from 'next-plausible';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
@@ -26,13 +27,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, []);
   return (
-    <>
+    <div style={{marginLeft: 'auto', marginRight: 'auto', maxWidth: '1200px'}}>
       {loading ? (
         <FullLoading></FullLoading>
       ) : (
-        <Component {...pageProps} />
+        <PlausibleProvider domain="cocktailrecipe.co">
+          <Component {...pageProps} />
+        </PlausibleProvider>
       )}
-    </>
+    </div>
   );
 }
 

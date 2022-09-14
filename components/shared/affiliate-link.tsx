@@ -1,12 +1,15 @@
-import { NextPage } from "next"
-import Image from "next/image"
+import { NextPage } from "next";
+import Image from "next/image";
+import {usePlausible} from 'next-plausible';
 
 type AffiliateProps = {
 }
 
 export const AffiliateLink: NextPage<AffiliateProps> = () => {
+    const plausible = usePlausible();
+
     return (
-        <a href="https://amzn.to/3L7fbDz" target="_blank">
+        <a href="https://amzn.to/3L7fbDz" target="_blank" onClick={() => plausible('affiliate-link-clicked')}>
             <div className="grid grid-cols-5">
                 <div className="mt-2 col-span-0 sm:col-span-1 display-none display-block-sm">
                     <Image src="/images/cocktail-set.jpg" width="310" height="250" style={{

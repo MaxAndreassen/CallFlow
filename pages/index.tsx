@@ -113,7 +113,7 @@ const Home: NextPage = () => {
         <div className="flex justify-center mb-2 md:mb-0" style={{ paddingLeft: "1.5rem", paddingRight: "1.5rem", flexWrap: "wrap" }}>
           <div className="search-wrapper">
             <SearchIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-600 search-icon" aria-hidden="true" />
-            <DebounceInput className="search" type="text" placeholder="find a cocktail" value={searchTerm} debounceTimeout={300} onChange={(e) => { handleSearch(e) }}>
+            <DebounceInput className="search" type="text" placeholder="find a cocktail" value={searchTerm} debounceTimeout={900} onChange={(e) => { handleSearch(e) }}>
             </DebounceInput>
           </div>
           <div>

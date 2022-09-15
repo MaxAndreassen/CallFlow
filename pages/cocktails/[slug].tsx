@@ -7,7 +7,10 @@ import { CocktailIngredients } from '../../components/cocktails/cocktail-ingredi
 import { AffiliateLink } from '../../components/shared/affiliate-link';
 import { Logo } from '../../components/shared/logo';
 import { getLandingPage } from '../api/cocktails/[slug]';
-import {usePlausible} from 'next-plausible';
+import { usePlausible } from 'next-plausible';
+import { useState, useEffect } from 'react';
+import { ArrowCircleUpIcon, CheckCircleIcon } from '@heroicons/react/solid';
+import { Loading } from '../../components/shared/loading';
 
 type LandingPageProps = {
     props: { cocktail: any }
@@ -16,6 +19,20 @@ type LandingPageProps = {
 const LandingPage: NextPage<LandingPageProps> = (props: any) => {
     const router = useRouter();
     const plausible = usePlausible();
+
+    const [voted, setVoted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [votes, setVotes] = useState(props?.cocktail?.votes as number)
+
+    useEffect(() => {
+        fetch(`/api/votes/${props?.cocktail?.id}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setVoted(data['voted']);
+                setLoading(false);
+            })
+            .finally(() => setLoading(false));
+    }, []);
 
     const randomCocktail = async () => {
         let response = await fetch('/api/cocktails/random');
@@ -31,6 +48,60 @@ const LandingPage: NextPage<LandingPageProps> = (props: any) => {
             console.log(data.message);
         }
     }
+
+    const handleVote = () => {
+        if (loading)
+            return;
+
+        if (voted) {
+            deleteVote();
+        } else {
+            vote();
+        }
+    }
+
+    const vote = async () => {
+        if (loading)
+            return;
+
+        setLoading(true);
+        setVotes(!votes ? 1 : votes + 1);
+        setVoted(true);
+
+        try {
+            // save the post
+            let response = await fetch('/api/votes/' + props?.cocktail.id, {
+                method: 'POST'
+            });
+
+            // get the data
+            let data = await response.json();
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const deleteVote = async () => {
+        if (loading)
+            return;
+
+        setLoading(true);
+        setVotes(!votes ? 0 : votes - 1);
+        setVoted(false);
+
+        try {
+            // save the post
+            let response = await fetch('/api/votes/' + props?.cocktail?.id, {
+                method: 'DELETE'
+            });
+
+            // get the data
+            let data = await response.json();
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <>
             <Head>
@@ -93,12 +164,40 @@ const LandingPage: NextPage<LandingPageProps> = (props: any) => {
                                             </div>
                                             <div className="col-span-3 sm:col-span-3 border-2 pb-2 md:pb-2" style={{ borderLeft: 0, borderRight: 0, borderBottom: 0 }}>
                                                 <p className='text-white text-center font-bold text-sm mt-6'>Recommended Glass: {props?.cocktail?.glassType}</p>
+                                                <p className="text-center mb-0 mt-3 text-white font-bold text-sm">{votes ?? 0} votes</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="lg:col-span-1">
+                    </div>
+                    <div className="lg:col-span-1">
+                    </div>
+                    <div className='lg:col-span-2 neon-box-green hover:bg-lime-300 mt-4 p-4' style={{ cursor: 'pointer' }}>
+                        {loading ?
+                            <div className="group relative px-3 md:px-5 pt-3" style={{ marginBottom: 'auto', marginTop: 'auto' }} onClick={() => handleVote()}>
+                                <div className='flex justify-center'>
+                                    <Loading></Loading>
+                                </div>
+                            </div> :
+                            <div className="group relative px-3 md:px-5 pt-3" style={{ marginBottom: 'auto', marginTop: 'auto' }} onClick={() => handleVote()}>
+                                {!voted ?
+                                    <div className='flex justify-center'>
+                                        <div className='mr-2'>
+                                            <ArrowCircleUpIcon className="text-white" style={{ width: "26px", height: "26px" }}></ArrowCircleUpIcon>
+                                        </div>
+                                        <p className="text-center mb-3 mr-2 text-white font-bold">UPVOTE COCKTAIL</p>
+                                    </div> :
+                                    <div className='flex justify-center'>
+                                        <div className='mr-2'>
+                                            <CheckCircleIcon className="text-lime-500" style={{ width: "26px", height: "26px" }}></CheckCircleIcon>
+                                        </div>
+                                        <p className="text-center mb-3 mr-2 text-lime-500 font-bold">COCKTAIL UPVOTED</p>
+                                    </div>}
+                            </div>}
                     </div>
                     <div className="lg:col-span-1">
                     </div>

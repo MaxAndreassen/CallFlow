@@ -21,6 +21,11 @@ export default async (req: any, res: any) => {
 
     // Create each URL row
     cocktails.forEach(cocktail => {
+      //@ts-ignore
+      cocktail._id = null;
+      //@ts-ignore
+      cocktail.createdAt = null;
+
       smStream.write({
         url: `/cocktails/${cocktail.name}`,
         changefreq: 'daily',

@@ -1,7 +1,8 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import clientPromise from '../../../lib/mongodb';
 
-export default async (req: any, res: any) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const smStream = new SitemapStream({
       hostname: `https://${req.headers.host}`,
@@ -40,9 +41,7 @@ export default async (req: any, res: any) => {
     const sitemapOutput = (await streamToPromise(smStream)).toString();
 
     // Change headers
-    res.writeHead(200, {
-      'Content-Type': 'application/xml'
-    });
+    res.setHeader('Content-Type', 'text/xml');
 
     // Display output to user
     res.end(sitemapOutput);

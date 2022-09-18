@@ -1,0 +1,6 @@
+Sitemap: https://cocktailrecipe.co/api/cocktails/sitemap
+
+User-agent: *
+Allow: /*
+
+Disallow: /api/*

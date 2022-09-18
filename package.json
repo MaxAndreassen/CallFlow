@@ -20,7 +20,8 @@
     "react": "18.1.0",
     "react-color-palette": "^6.2.0",
     "react-debounce-input": "^3.3.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "sitemap": "^7.1.1"
   },
   "devDependencies": {
     "@types/node": "17.0.35",

@@ -2,6 +2,6 @@ Sitemap: https://cocktailrecipe.co/api/cocktails/sitemap
 
 User-agent: *
 Allow: /*
-Allow: /cocktails/sitemap
+Allow: /api/cocktails/sitemap
 
 Disallow: /api/*

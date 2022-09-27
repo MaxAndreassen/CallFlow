@@ -85,6 +85,9 @@ async function getCocktails(
         let posts;
         let count = 0;
 
+        //TODO: Refactor this to derive the filter and sort objects
+        //      in there own methods to then pass in to one db call.
+        //      As it currently stands, this is not SOLID.
         if (!!cleanQuery && cleanSort == 'new') {
             posts = await db
                 .collection('cocktails')

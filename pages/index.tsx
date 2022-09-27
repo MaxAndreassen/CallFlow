@@ -53,7 +53,7 @@ const Home: NextPage = () => {
     const page = router.query.hasOwnProperty('p') ? router.query.p : 0;
     const sort = router.query.hasOwnProperty('s') ? router.query.s : 'best';
 
-    fetch(`/api/cocktails/full?q=${search}&p=${page}&s=${sort}`)
+    fetch(`/api/cocktails?q=${search}&p=${page}&s=${sort}`)
       .then((res) => res.json())
       .then((data) => {
         setCocktails(data['message']);

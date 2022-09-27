@@ -80,7 +80,7 @@ const CreateCocktail = () => {
 
         try {
             // save the post
-            let response = await fetch('/api/cocktails/full', {
+            let response = await fetch('/api/cocktails', {
                 method: 'POST',
                 body: JSON.stringify(cocktail),
             });;
